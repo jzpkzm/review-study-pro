@@ -5,5 +5,6 @@ import com.jizp.entity.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> findAll();
+    List<User> xmlFindAll();
+    List<User> annotationFindAll();
 }

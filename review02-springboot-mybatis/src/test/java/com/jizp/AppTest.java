@@ -4,7 +4,6 @@ import com.jizp.entity.User;
 import com.jizp.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,7 +24,13 @@ public class AppTest {
 
     @Test
     public void findAll() {
-        List<User> list =  userService.findAll();
+        List<User> list =  userService.xmlFindAll();
+        System.out.println(list);
+    }
+
+    @Test
+    public void annotationFindAll() {
+        List<User> list =  userService.annotationFindAll();
         System.out.println(list);
     }
 }
