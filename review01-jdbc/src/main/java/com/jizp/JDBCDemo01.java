@@ -33,12 +33,12 @@ public class JDBCDemo01 {
             //3、获取预处理，查询
             //3.1 无参数
             String sql_param = "select * from user where id = ?";
-            ps = connection.prepareStatement(sql_param);
-            ps.setInt(1, 1);
+//            ps = connection.prepareStatement(sql_param);
+//            ps.setInt(1, 1);
 
             //3.2 有参数
-//            String sql_no_param = "select * from user";
-//            ps = connection.prepareStatement(sql_no_param);
+            String sql_no_param = "select * from user";
+            ps = connection.prepareStatement(sql_no_param);
 
             //4、执行
             rs = ps.executeQuery();
