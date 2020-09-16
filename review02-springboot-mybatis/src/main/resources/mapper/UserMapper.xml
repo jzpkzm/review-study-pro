@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jizp.mapper.UserXmlMapper">
-    <select id="findAll" resultType="com.jizp.entity.User">
+
+    <resultMap id="userResultMap" type="com.jizp.entity.User">
+        <result typeHandler="com.jizp.handler.MyDateTypeHandler" column="regTime" javaType="java.util.Date"
+                jdbcType="VARCHAR"
+                property="regTime"/>
+    </resultMap>
+
+
+    <select id="findAll"  resultType="com.jizp.entity.User"> <!--resultMap="userResultMap"-->
         SELECT * FROM USER
     </select>
+
+    <select id="findUserById" parameterType="int" resultType="com.jizp.entity.User">
+        select * from user where id= #{id}
+    </select>
+
+    <!--javaType、jdbcType、typeHandler 可以只配置类型（javaType、typeHandler），也可以只配置typeHandler-->
+    <insert id="addUser" parameterType="com.jizp.entity.User">
+        insert into USER (id, name, regTime) values (#{id}, #{name}, #{regTime, javaType=Date,jdbcType=VARCHAR,typeHandler=com.jizp.handler.MyDateTypeHandler});
+    </insert>
 </mapper>

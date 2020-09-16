@@ -7,6 +7,7 @@ import com.jizp.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: jizongpeng
@@ -32,8 +33,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(int id) {
+        return userXmlMapper.findUserById(id);
+    }
+
+    @Override
     public List<User> annotationFindAll() {
         return userAnnotationMapper.findAll();
+    }
+
+    @Override
+    public int addUser(User user) {
+        return userXmlMapper.addUser(user);
     }
 
 

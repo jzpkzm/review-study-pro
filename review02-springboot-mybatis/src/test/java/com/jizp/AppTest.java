@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: jizongpeng
@@ -29,8 +31,24 @@ public class AppTest {
     }
 
     @Test
+    public void findUserById() {
+        User user = userService.findUserById(3);
+        System.out.println(user);
+    }
+
+    @Test
     public void annotationFindAll() {
         List<User> list =  userService.annotationFindAll();
         System.out.println(list);
+    }
+
+    @Test
+    public void addUserTypeHandler() {
+        User user = new User();
+        user.setId(4);
+        user.setName("typeHandler2");
+        user.setRegTime(new Date());
+
+        System.out.println(userService.addUser(user));
     }
 }

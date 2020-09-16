@@ -2,6 +2,8 @@ package com.jizp.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Author: jizongpeng
  * @Date: 2020/9/9 19:15
@@ -12,4 +14,5 @@ import lombok.Data;
 public class User {
     private int id;
     private String name;
+    private Date regTime;
 }
