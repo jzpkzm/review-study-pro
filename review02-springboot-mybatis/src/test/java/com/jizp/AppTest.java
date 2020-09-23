@@ -62,4 +62,16 @@ public class AppTest {
         Blog blog = blogService.findBlog(1);
         System.out.println(blog);
     }
+
+    @Test
+    public void findBlogAuthorById() {
+        Blog blog = blogService.findBlogAuthorById(1);
+        System.out.println(blog);
+    }
+
+    @Test
+    public void findBlogPostById() {
+        Blog blog = blogService.findBlogPostById(1);
+        System.out.println(blog);
+    }
 }

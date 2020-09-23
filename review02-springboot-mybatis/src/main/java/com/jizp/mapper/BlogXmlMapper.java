@@ -10,4 +10,8 @@ import com.jizp.entity.Blog;
  */
 public interface BlogXmlMapper {
     Blog findBlogById(int id);
+
+    Blog findBlogAuthorById(int id);
+
+    Blog findBlogPostById(int id);
 }

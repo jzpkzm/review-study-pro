@@ -21,4 +21,14 @@ public class BlogServiceImpl implements BlogService {
     public Blog findBlog(int id) {
         return blogXmlMapper.findBlogById(id);
     }
+
+    @Override
+    public Blog findBlogAuthorById(int id) {
+        return blogXmlMapper.findBlogAuthorById(id);
+    }
+
+    @Override
+    public Blog findBlogPostById(int id) {
+        return blogXmlMapper.findBlogPostById(id);
+    }
 }
