@@ -13,22 +13,22 @@
 <!--            <result property="email" column="email"/>-->
 <!--        </association>-->
         <!--方式二 采用resultMap-->
-        <association property="author" column="author_id" resultMap="authorResultMap"/>
+        <association property="author" column="author_id" resultMap="authorResultMap" columnPrefix="author_"/>
 
-        <collection property="posts"  javaType="ArrayList" column="blog_id" ofType="com.jizp.entity.Post" resultMap="postResultMap"/>
+        <collection property="posts"  javaType="ArrayList" column="blog_id" ofType="com.jizp.entity.Post" resultMap="postResultMap"  columnPrefix="post_"/>
     </resultMap>
 
     <resultMap id="authorResultMap" type="com.jizp.entity.Author">
-        <id property="id" column="author_id"/>
-        <result property="userName" column="author_username"/>
-        <result property="passWord" column="author_password"/>
-        <result property="email" column="author_email"/>
+        <id property="id" column="id"/>
+        <result property="userName" column="username"/>
+        <result property="passWord" column="password"/>
+        <result property="email" column="email"/>
     </resultMap>
 
     <resultMap id="postResultMap" type="com.jizp.entity.Post">
-        <id property="id" column="post_id"/>
-        <result property="subject" column="post_subject"/>
-        <result property="body" column="post_body"/>
+        <id property="id" column="id"/>
+        <result property="subject" column="subject"/>
+        <result property="body" column="body"/>
     </resultMap>
 
     <select id="findBlogById" resultMap="blogResultMap">
