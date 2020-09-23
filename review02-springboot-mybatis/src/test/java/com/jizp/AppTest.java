@@ -1,6 +1,8 @@
 package com.jizp;
 
+import com.jizp.entity.Blog;
 import com.jizp.entity.User;
+import com.jizp.service.BlogService;
 import com.jizp.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,5 +52,14 @@ public class AppTest {
         user.setRegTime(new Date());
 
         System.out.println(userService.addUser(user));
+    }
+
+    @Autowired
+    private BlogService blogService;
+
+    @Test
+    public void findBlogById() {
+        Blog blog = blogService.findBlog(1);
+        System.out.println(blog);
     }
 }

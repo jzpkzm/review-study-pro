@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jizp.mapper.BlogXmlMapper">
+
+    <resultMap id="blogResultMap" type="com.jizp.entity.Blog">
+        <id property="id" column="blog_id"/>
+        <result property="title" column="blog_title"/>
+        <!--方式一 -->
+<!--        <association property="author" column="author_id">-->
+<!--            <id property="id" column="id"/>-->
+<!--            <result property="userName" column="username"/>-->
+<!--            <result property="passWord" column="password"/>-->
+<!--            <result property="email" column="email"/>-->
+<!--        </association>-->
+        <!--方式二 采用resultMap-->
+        <association property="author" column="author_id" resultMap="authorResultMap"/>
+
+        <collection property="posts"  javaType="ArrayList" column="blog_id" ofType="com.jizp.entity.Post" resultMap="postResultMap"/>
+    </resultMap>
+
+    <resultMap id="authorResultMap" type="com.jizp.entity.Author">
+        <id property="id" column="author_id"/>
+        <result property="userName" column="author_username"/>
+        <result property="passWord" column="author_password"/>
+        <result property="email" column="author_email"/>
+    </resultMap>
+
+    <resultMap id="postResultMap" type="com.jizp.entity.Post">
+        <id property="id" column="post_id"/>
+        <result property="subject" column="post_subject"/>
+        <result property="body" column="post_body"/>
+    </resultMap>
+
+    <!--select查询语句不要写*，把需要的字段都列举出来，以防对应出错，导致查询出来的数据丢失。具体原因后续查看源码再分析-->
+    <select id="findBlogById" resultMap="blogResultMap">
+        select B.id as blog_id, B.title as blog_title, B.author_id as blog_author_id, A.id as author_id, A.username as author_username, A.password as author_password, A.email as author_email, P.id as post_id, P.blog_id as post_blog_id, P.subject as post_subject, P.body as post_body from blog B left outer join author A on B.author_id = A.id left outer join post P on B.id = P.blog_id where B.id = #{id}
+    </select>
+
+</mapper>
