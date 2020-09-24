@@ -1,8 +1,10 @@
 package com.jizp;
 
 import com.jizp.entity.Blog;
+import com.jizp.entity.Person;
 import com.jizp.entity.User;
 import com.jizp.service.BlogService;
+import com.jizp.service.PersonService;
 import com.jizp.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,5 +75,14 @@ public class AppTest {
     public void findBlogPostById() {
         Blog blog = blogService.findBlogPostById(1);
         System.out.println(blog);
+    }
+
+    @Autowired
+    private PersonService personService;
+
+    @Test
+    public void findPersonAll() {
+        List<Person> list = personService.findAll();
+        System.out.println(list);
     }
 }
