@@ -12,13 +12,73 @@
     <select id="findAll"  resultType="com.jizp.entity.User"> <!--resultMap="userResultMap"-->
         SELECT * FROM USER
     </select>
-
+    
+    
     <select id="findUserById" parameterType="int" resultType="com.jizp.entity.User">
         select * from user where id= #{id}
+    </select>
+    
+
+    <select id="findUserORByName" parameterType="String" resultType="com.jizp.entity.User">
+        select * from user
+        <if test="name != null">
+        <!--第一种使用双引号-->
+            <!--where name like "%"#{name}"%"-->
+        <!--第二种使用concat-->
+            where name like concat('%', #{name}, '%')
+        </if>
+    </select>
+    
+    <select id="findUserByNameOrSex"  resultType="com.jizp.entity.User">
+        select * from User
+        <choose>
+            <when test="name != null">
+                where name like concat('%', #{name}, '%')
+            </when>
+            <when test="sex != null">
+                where sex = #{sex}
+            </when>
+            <otherwise>
+                where id = 1
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="findUserByNameAndSex"   resultType="com.jizp.entity.User">
+        select * from USER
+        <!--方式一-->
+        <!--
+        <where>
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+        </where>-->
+        <!--方式二：trime标签参考https://blog.csdn.net/wt_better/article/details/80992014-->
+        <trim prefix="where" prefixOverrides="AND | OR">
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+        </trim>
+    </select>
+
+    <select id="findUserBySex" resultType="com.jizp.entity.User">
+        select * from USER
+        where sex in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <!--javaType、jdbcType、typeHandler 可以只配置类型（javaType、typeHandler），也可以只配置typeHandler-->
     <insert id="addUser" parameterType="com.jizp.entity.User">
-        insert into USER (id, name, regTime) values (#{id}, #{name}, #{regTime, javaType=Date,jdbcType=VARCHAR,typeHandler=com.jizp.handler.MyDateTypeHandler});
+        insert into USER (id, name, regTime, sex) values (#{id}, #{name}, #{regTime, javaType=Date,jdbcType=VARCHAR,typeHandler=com.jizp.handler.MyDateTypeHandler}, #{sex});
     </insert>
 </mapper>

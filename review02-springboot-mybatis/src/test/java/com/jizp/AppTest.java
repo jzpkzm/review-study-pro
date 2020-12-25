@@ -41,6 +41,24 @@ public class AppTest {
     }
 
     @Test
+    public  void findUserORById() {
+        List<User> list = userService.findUserORByName("type");
+        System.out.println(list);
+    }
+
+    @Test
+    public  void findUserByNameOrSex() {
+        List<User> user = userService.findUserByNameOrSex(Map.of("sex", "0"));
+        System.out.println(user);
+    }
+
+    @Test
+    public  void findUserBySex() {
+        List<User> user = userService.findUserBySex(List.of(0, 1));
+        System.out.println(user);
+    }
+
+    @Test
     public void annotationFindAll() {
         List<User> list =  userService.annotationFindAll();
         System.out.println(list);

@@ -38,6 +38,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findUserORByName(String name) {
+        return userXmlMapper.findUserORByName(name);
+    }
+
+    @Override
+    public List<User> findUserByNameOrSex(Map<String, String> conditionMap) {
+        return userXmlMapper.findUserByNameOrSex(conditionMap);
+    }
+
+    @Override
+    public List<User> findUserBySex(List<Integer> sexList) {
+        return userXmlMapper.findUserBySex(sexList);
+    }
+
+    @Override
     public List<User> annotationFindAll() {
         return userAnnotationMapper.findAll();
     }
